@@ -1,0 +1,11 @@
+[package]
+name = "spvbuilder"
+version = "0.1.0"
+authors = ["Lei Zhang <antiagainst@gmail.com>"]
+
+[dependencies]
+clap = "2.20"
+regex = "0.2"
+serde = "0.9"
+serde_derive = "0.9"
+serde_json = "0.9"
