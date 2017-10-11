@@ -310,7 +310,9 @@ fn gen_inst_builder_h(context: &Context) -> String {
              // Instruction building methods.
              {inst_methods};
 
-             // All-in-one method for creating binary operations.
+             // All-in-one methods for creating unary and binary operations.
+             InstBuilder &unaryOp(spv::Op op, uint32_t result_type, uint32_t result_id,
+                                  uint32_t operand);
              InstBuilder &binaryOp(spv::Op op, uint32_t result_type, uint32_t result_id,
                                    uint32_t lhs, uint32_t rhs);
 
@@ -591,7 +593,7 @@ fn gen_inst_builder_cpp(context: &Context) -> String {
             inst_methods = inst_impls.join("\n\n"),
             fixup_methods = fixup_impls.join("\n\n"),
             operand_methods = operand_impls.join("\n\n"),
-            version = (grammar.major_version << 16) | grammar.minor_version,
+            version = (grammar.major_version << 16) | (grammar.minor_version << 8),
             revision = grammar.revision)
 }
 
