@@ -244,7 +244,7 @@ fn gen_inst_builder_h(context: &Context) -> String {
              #include <utility>
              #include <vector>
 
-             #include \"spirv/1.0/spirv.hpp11\"
+             #include \"spirv/unified1/spirv.hpp11\"
              #include \"llvm/ADT/ArrayRef.h\"
              #include \"llvm/ADT/Optional.h\"
 
@@ -319,6 +319,21 @@ fn gen_inst_builder_h(context: &Context) -> String {
              // Methods for building constants.
              InstBuilder &opConstant(uint32_t result_type, uint32_t result_id,
                                      uint32_t value);
+
+            // All-in-one method for creating different types of OpImageSample*.
+            InstBuilder &
+            opImageSample(uint32_t result_type, uint32_t result_id,
+                            uint32_t sampled_image, uint32_t coordinate, uint32_t dref,
+                            llvm::Optional<spv::ImageOperandsMask> image_operands,
+                            bool is_explicit, bool is_sparse);
+
+            // All-in-one method for creating different types of
+            // OpImageRead*/OpImageFetch*.
+            InstBuilder &
+            opImageFetchRead(uint32_t result_type, uint32_t result_id, uint32_t image,
+                            uint32_t coordinate,
+                            llvm::Optional<spv::ImageOperandsMask> image_operands,
+                            bool is_fetch, bool is_sparse);
 
              // Methods for supplying additional parameters.
              {fixup_methods};
